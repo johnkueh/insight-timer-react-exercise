@@ -33,3 +33,8 @@ REACT_APP_GOREST_API_TOKEN=eBkJwF0AC-liANiOODV8HueLvKa-FhjOYygY
 - 7:00pm dinner break
 - 7:30 pm continue
 - 8:34pm cleanup & documentation
+
+## Further enhancements with extra time:
+
+- Add image placeholder for thumbnail (sometimes the thumbnail from API doesn't resolve)
+- Clean up the useAlbum hook to handle errors more elegantly
