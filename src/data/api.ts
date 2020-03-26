@@ -61,7 +61,7 @@ export const photos: Photo[] = [
     thumbnail: "https://lorempixel.com/150/150/abstract/?42724"
   },
   {
-    id: "2569",
+    id: "5",
     album_id: "3",
     title:
       "Quos ab pariatur molestias eum labore. Commodi excepturi harum nihil nihil id repellendus.",
