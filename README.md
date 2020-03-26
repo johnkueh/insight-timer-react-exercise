@@ -17,11 +17,13 @@
 
 It a normal create-react-app with TypeScript.
 
-`yarn && yarn start`
+1. Create a `.env` file with the following content at the directory root
 
-OR
+```
+REACT_APP_GOREST_API_TOKEN=eBkJwF0AC-liANiOODV8HueLvKa-FhjOYygY
+```
 
-`npm install && npm start`
+2. `yarn && yarn start` OR `npm install && npm start`
 
 ## Timesheet
 
