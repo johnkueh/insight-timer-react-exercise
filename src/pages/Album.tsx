@@ -14,9 +14,14 @@ const Album: React.FC<Props> = () => {
 
   return (
     <Container>
-      <Flex alignItems="center" justifyContent="space-between" mt={20} p={8}>
+      <Flex
+        alignItems="center"
+        justifyContent="space-between"
+        mt={[10, 10, 20, 20]}
+        p={8}
+      >
         <Heading size="xl">{album.title}</Heading>
-        <Box>
+        <Box ml={3}>
           <Button
             mr={2}
             variant="ghost"
@@ -49,7 +54,7 @@ const Album: React.FC<Props> = () => {
                 textAlign="left"
                 shadow="none"
                 outline="none"
-                width="33.333%"
+                width={["100%", "100%", "50%", "33.333%"]}
                 as="button"
                 onClick={() => {
                   dispatch({
@@ -62,7 +67,7 @@ const Album: React.FC<Props> = () => {
               </PseudoBox>
             )
         )}
-        {photos.length === hidden.length && <Box>No photos</Box>}
+        {photos.length === hidden.length && <Box p={4}>No photos</Box>}
       </Flex>
     </Container>
   );
