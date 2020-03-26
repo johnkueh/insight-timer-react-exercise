@@ -1,4 +1,8 @@
 import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
   Box,
   Button,
   Flex,
@@ -28,6 +32,22 @@ const Album: React.FC<Props> = () => {
         <Spinner color="brand.purple" />
       </Container>
     );
+
+  if (data.errors.length > 0) {
+    return (
+      <Container p={24}>
+        {data.errors.map(({ name, message }) => {
+          return (
+            <Alert mb={2} status="error">
+              <AlertIcon />
+              <AlertTitle mr={2}>{name}</AlertTitle>
+              <AlertDescription>{message}</AlertDescription>
+            </Alert>
+          );
+        })}
+      </Container>
+    );
+  }
 
   const { album, photos } = data;
 
