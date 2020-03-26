@@ -40,12 +40,7 @@ const Album: React.FC<Props> = () => {
           </Button>
         </Box>
       </Flex>
-      <Flex
-        p={5}
-        justifyContent="space-between"
-        flexWrap="wrap"
-        bg="backgrounds.gray"
-      >
+      <Flex p={5} flexWrap="wrap" bg="backgrounds.gray">
         {photos.map(
           photo =>
             !hidden.includes(photo.id) && (
