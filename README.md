@@ -9,6 +9,8 @@
 
 ![Preview](./public/Preview.gif)
 
+Deployed app: [https://insight-timer-react-exercise.netlify.com/](https://insight-timer-react-exercise.netlify.com/)
+
 ### When API hits rate limit
 
 ![Error](./public/Error.png)
