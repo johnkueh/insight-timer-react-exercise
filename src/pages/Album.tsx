@@ -1,16 +1,35 @@
-import { Box, Button, Flex, Heading, PseudoBox } from "@chakra-ui/core";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  PseudoBox,
+  Spinner
+} from "@chakra-ui/core";
 import React, { useReducer } from "react";
+import { useParams } from "react-router-dom";
 import Container from "../components/Container";
 import Photo from "../components/Photo";
-import { album, photos } from "../data/api";
+import { useAlbum } from "../data/api";
 
 interface Props {}
 
 const Album: React.FC<Props> = () => {
+  const { albumId } = useParams();
+  const data = useAlbum(albumId!);
   const [{ selected, hidden }, dispatch] = useReducer(reducer, {
     selected: [],
     hidden: []
   });
+
+  if (data.loading)
+    return (
+      <Container p={24} width="10rem" mx="auto">
+        <Spinner color="brand.purple" />
+      </Container>
+    );
+
+  const { album, photos } = data;
 
   return (
     <Container>
@@ -20,7 +39,7 @@ const Album: React.FC<Props> = () => {
         mt={[10, 10, 20, 20]}
         p={8}
       >
-        <Heading size="xl">{album.title}</Heading>
+        <Heading size="xl">{album?.title}</Heading>
         <Box ml={3}>
           <Button
             mr={2}
@@ -46,7 +65,7 @@ const Album: React.FC<Props> = () => {
         </Box>
       </Flex>
       <Flex p={5} flexWrap="wrap" bg="backgrounds.gray">
-        {photos.map(
+        {photos?.map(
           photo =>
             !hidden.includes(photo.id) && (
               <PseudoBox
@@ -67,7 +86,7 @@ const Album: React.FC<Props> = () => {
               </PseudoBox>
             )
         )}
-        {photos.length === hidden.length && <Box p={4}>No photos</Box>}
+        {photos?.length === hidden.length && <Box p={4}>No photos</Box>}
       </Flex>
     </Container>
   );

@@ -1,3 +1,5 @@
+import { useCallback, useEffect, useState } from "react";
+
 export interface Album {
   id: string;
   user_id: string;
@@ -12,6 +14,52 @@ export interface Photo {
   url: string;
   thumbnail: string;
 }
+
+export const useAlbum = (id: string) => {
+  const [loading, setLoading] = useState(false);
+  const [results, setResults] = useState<[Album, Photo[]]>();
+  const handleResults = useCallback(setResults, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      const res = await Promise.all([
+        getAlbumAsync(id),
+        getAlbumPhotosAsync(id)
+      ]);
+      handleResults(res);
+      setLoading(false);
+    };
+
+    fetchData();
+  }, [id, handleResults]);
+
+  return {
+    loading,
+    album: results?.[0],
+    photos: results?.[1]
+  };
+};
+
+const GOREST_API_URL = `https://gorest.co.in/public-api`;
+
+const headers = new Headers({
+  Authorization: `Bearer ${process.env["REACT_APP_GOREST_API_TOKEN"]}`
+});
+
+const getAlbumAsync = async (id: string) => {
+  const res = await fetch(`${GOREST_API_URL}/albums/${id}`, { headers });
+  const data = await res.json();
+  return data.result;
+};
+
+const getAlbumPhotosAsync = async (id: string) => {
+  const res = await fetch(`${GOREST_API_URL}/photos?album_id=${id}`, {
+    headers
+  });
+  const data = await res.json();
+  return data.result;
+};
 
 export const album: Album = {
   id: "3",
